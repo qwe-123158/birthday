@@ -8,7 +8,7 @@
     body {
       margin: 0;
       padding: 0;
-      background: linear-gradient(to right, #c2e9fb, #a1c4fd); /* Xanh dương nhạt */
+      background: linear-gradient(to bottom right, #a1c4fd, #ffffff); /* Xanh dương → Trắng */
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       color: #333;
       text-align: center;
@@ -24,7 +24,7 @@
     }
 
     h1 {
-      color: #007BFF; /* Màu xanh dương tươi */
+      color: #007BFF;
       font-size: 36px;
       margin-bottom: 10px;
     }
@@ -49,10 +49,16 @@
   <div class="card">
     <div class="cake">🎂</div>
     <h1>Chúc mừng sinh nhật, <span id="name">bạn</span>!</h1>
-    <p>Chúc bạn luôn vui vẻ, hạnh phúc và thành công trong cuộc sống!</p>
+    <p id="wish">Chúc bạn luôn vui vẻ, hạnh phúc và thành công trong cuộc sống!</p>
     <p>Ngày sinh: <span id="dob">--</span></p>
   </div>
   <div class="footer">Tạo bằng GitHub Pages 💖</div>
+
+  <!-- Nhạc Happy Birthday tự động phát -->
+  <audio id="birthdaySong" autoplay>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+    Trình duyệt của bạn không hỗ trợ phát nhạc.
+  </audio>
 
   <script>
     // Lấy name và date từ URL
@@ -60,11 +66,27 @@
     const name = params.get('name') || 'bạn';
     const date = params.get('date') || '--';
 
+    // Danh sách lời chúc ngẫu nhiên
+    const wishes = [
+      "Chúc bạn luôn mạnh khỏe và tràn đầy năng lượng!",
+      "Chúc bạn một tuổi mới ngập tràn niềm vui và thành công!",
+      "Tuổi mới rực rỡ và nhiều điều bất ngờ tuyệt vời nhé!",
+      "Chúc bạn có một ngày sinh nhật đáng nhớ và hạnh phúc!",
+      "Mỗi ngày đều là một niềm vui mới – chúc mừng sinh nhật!",
+      "Thêm tuổi mới, thêm yêu đời và rực rỡ hơn nhé!",
+      "Sinh nhật vui vẻ! Mong điều ước của bạn sẽ thành sự thật.",
+      "Một năm tuyệt vời đang chờ bạn phía trước – chúc mừng sinh nhật!",
+      "Chúc bạn có thật nhiều tiếng cười và kỷ niệm đẹp trong ngày hôm nay!",
+      "Gửi bạn ngàn lời chúc tốt đẹp trong ngày đặc biệt này!"
+    ];
+
+    // Lấy ngẫu nhiên 1 lời chúc
+    const randomWish = wishes[Math.floor(Math.random() * wishes.length)];
+
     // Hiển thị lên trang
     document.getElementById('name').innerText = decodeURIComponent(name);
     document.getElementById('dob').innerText = date;
+    document.getElementById('wish').innerText = randomWish;
   </script>
 </body>
 </html>
-
-   
