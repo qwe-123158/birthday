@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Chúc mừng sinh nhật!</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: 'Segoe UI', sans-serif;
+      padding-top: 60px;
+      background-image: url('https://i.imgur.com/TxzC70f.jpg');
+      background-size: cover;
+      background-position: center;
+      color: #fff;
+    }
+    h1 {
+      font-size: 3em;
+      color: #ffe600;
+      text-shadow: 2px 2px 5px #000;
+    }
+    p, #customMessage {
+      font-size: 1.5em;
+      text-shadow: 1px 1px 3px #000;
+    }
+    .cake-img {
+      width: 300px;
+      height: auto;
+      margin-top: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(255,255,255,0.5);
+    }
+    .confetti {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 999;
+    }
+  </style>
+</head>
+<body>
+  <canvas class="confetti" id="confetti-canvas"></canvas>
+  <h1 id="title">🎂</h1>
+  <p id="dateText"></p>
+  <p id="customMessage"></p>
+  <img id="cake" class="cake-img" src="" alt="Birthday Cake" />
+  <audio autoplay loop>
+    <source src="https://www.fesliyanstudios.com/play-mp3/387" type="audio/mpeg">
+    Trình duyệt của bạn không hỗ trợ âm thanh.
+  </audio>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const name = decodeURIComponent(params.get("name") || "bạn");
+    const date = decodeURIComponent(params.get("date") || "");
+
+    document.getElementById("title").textContent = `Chúc mừng sinh nhật, ${name}! 🎉`;
+    document.getElementById("dateText").textContent = date ? `Ngày sinh: ${date}` : "";
+
+    // Tin nhắn cá nhân hóa
+    const messageTemplates = [
+      `Chúc ${name} luôn mạnh khỏe, hạnh phúc và thành công trong cuộc sống! 💖`,
+      `${name} ơi, hôm nay là ngày của bạn – tận hưởng từng khoảnh khắc nhé! 🌟`,
+      `Sinh nhật vui vẻ nha ${name}! Mong mọi điều ước của bạn đều trở thành hiện thực 🎈`,
+    ];
+    const message = messageTemplates[Math.floor(Math.random() * messageTemplates.length)];
+    document.getElementById("customMessage").textContent = message;
+
+    // Ảnh bánh sinh nhật ngẫu nhiên
+    const cakes = [
+      "https://i.imgur.com/KZsmUi2.jpg",
+      "https://i.imgur.com/Vz1lZ0F.jpg",
+      "https://i.imgur.com/nqQ79T3.jpg",
+      "https://i.imgur.com/DUZBFTe.jpg"
+    ];
+    document.getElementById("cake").src = cakes[Math.floor(Math.random() * cakes.length)];
+
+    // Hiệu ứng confetti
+    const duration = 10 * 1000;
+    const animationEnd = Date.now() + duration;
+    const confetti = () => {
+      if (Date.now() < animationEnd) {
+        requestAnimationFrame(confetti);
+        window.confetti({ particleCount: 3, angle: 60, spread: 55, origin: { x: 0 } });
+        window.confetti({ particleCount: 3, angle: 120, spread: 55, origin: { x: 1 } });
+      }
+    };
+    confetti();
+  </script>
+</body>
+</html>

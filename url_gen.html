@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Trình tạo link chúc mừng sinh nhật</title>
+</head>
+<body>
+  <h1>🎁 Trình tạo link chúc mừng sinh nhật</h1>
+
+  <label for="name">Tên người nhận:</label>
+  <input type="text" id="name"><br><br>
+
+  <label for="date">Ngày sinh (yyyy-mm-dd):</label>
+  <input type="date" id="date"><br><br>
+
+  <button onclick="generateURL()">Tạo link</button>
+
+  <p>🔗 Link được tạo: <a id="output" href="#" target="_blank"></a></p>
+
+  <script>
+    function generateURL() {
+      const name = encodeURIComponent(document.getElementById("name").value.trim());
+      const date = encodeURIComponent(document.getElementById("date").value.trim());
+      const base = "https://qwe-123158.github.io/birthday/index.html";
+
+      const finalURL = `${base}?name=${name}&date=${date}`;
+      const output = document.getElementById("output");
+      output.href = finalURL;
+      output.textContent = finalURL;
+    }
+  </script>
+</body>
+</html>
