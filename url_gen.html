@@ -1,33 +1,91 @@
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <title>Trình tạo link chúc mừng sinh nhật</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tạo thiệp chúc mừng sinh nhật</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #a1c4fd, #c2e9fb);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .container {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
+    }
+
+    h1 {
+      color: #007BFF;
+      margin-bottom: 30px;
+      font-size: 24px;
+    }
+
+    input[type="text"], input[type="date"] {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0 20px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #007BFF;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .footer {
+      margin-top: 20px;
+      font-size: 13px;
+      color: #666;
+    }
+  </style>
 </head>
 <body>
-  <h1>🎁 Trình tạo link chúc mừng sinh nhật</h1>
-
-  <label for="name">Tên người nhận:</label>
-  <input type="text" id="name"><br><br>
-
-  <label for="date">Ngày sinh (yyyy-mm-dd):</label>
-  <input type="date" id="date"><br><br>
-
-  <button onclick="generateURL()">Tạo link</button>
-
-  <p>🔗 Link được tạo: <a id="output" href="#" target="_blank"></a></p>
+  <div class="container">
+    <h1>Tạo link chúc mừng sinh nhật 🎂</h1>
+    <input type="text" id="name" placeholder="Nhập tên người nhận" required />
+    <input type="date" id="date" required />
+    <button onclick="generateLink()">Tạo link</button>
+    <div class="footer">Trang tạo thiệp GitHub Pages 💖</div>
+  </div>
 
   <script>
-    function generateURL() {
-      const name = encodeURIComponent(document.getElementById("name").value.trim());
-      const date = encodeURIComponent(document.getElementById("date").value.trim());
-      const base = "https://qwe-123158.github.io/birthday/index.html";
+    function generateLink() {
+      const name = document.getElementById('name').value.trim();
+      const date = document.getElementById('date').value;
+      if (!name || !date) {
+        alert("Vui lòng nhập đầy đủ thông tin.");
+        return;
+      }
 
-      const finalURL = `${base}?name=${name}&date=${date}`;
-      const output = document.getElementById("output");
-      output.href = finalURL;
-      output.textContent = finalURL;
+      const encodedName = encodeURIComponent(name);
+      const url = `index.html?name=${encodedName}&date=${date}`;
+      window.location.href = url;
     }
   </script>
 </body>
 </html>
+
